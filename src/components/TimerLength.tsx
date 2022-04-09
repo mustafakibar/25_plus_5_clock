@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react';
 import './TimerLength.scss';
 
 type TimerLengthProps = {
@@ -6,10 +7,10 @@ type TimerLengthProps = {
   decButtonId: string;
   incButtonId: string;
   lengthLabelId: string;
-  value: number;
+  initialValue: number;
   step?: number;
   disabled: boolean;
-  onUpdate: (updatedValue: number) => void;
+  onUpdate: (value: number) => void;
 };
 
 const TimerLength = ({
@@ -18,29 +19,43 @@ const TimerLength = ({
   decButtonId,
   incButtonId,
   lengthLabelId,
-  value,
+  initialValue,
   step = 1,
   disabled,
   onUpdate,
 }: TimerLengthProps) => {
+  const [value, setValue] = useState(initialValue);
+
+  const clickHandler = useCallback(
+    (length: number) => {
+      setValue(length);
+      onUpdate(length);
+    },
+    [onUpdate],
+  );
+
   return (
     <div className='timer-length'>
-      <h1 id={labelId}>{label}</h1>
+      <span id={labelId} className='label'>
+        {label}
+      </span>
       <div>
         <button
           id={decButtonId}
           className='decrement-button'
           disabled={disabled || value - step <= 0}
-          onClick={() => onUpdate(value - step)}
+          onClick={clickHandler.bind(this, value - step)}
         >
           <i className='fa-solid fa-circle-minus'></i>
         </button>
-        <span id={lengthLabelId}>{value}</span>
+        <span id={lengthLabelId} className='value'>
+          {value}
+        </span>
         <button
           id={incButtonId}
           className='increment-button'
           disabled={disabled}
-          onClick={() => onUpdate(value + step)}
+          onClick={clickHandler.bind(this, value + step)}
         >
           <i className='fa-solid fa-circle-plus'></i>
         </button>

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
-import './App.scss';
 import Timer from './components/Timer';
 import TimerLength from './components/TimerLength';
+import './App.scss';
 
 const App = () => {
   const [breakTimerLength, setBreakTimerLength] = useState(10);
@@ -22,11 +22,12 @@ const App = () => {
   );
 
   return (
-    <div>
-      <div>
+    <main>
+      <span className='title'>25 + 5 Clock</span>
+      <div className='timer-length-container'>
         <TimerLength
           label={'Break Length'}
-          value={breakTimerLength}
+          initialValue={breakTimerLength}
           disabled={breakTimerLengthDisabled}
           onUpdate={updateBreakTimerLength}
           labelId={'break-label'}
@@ -34,9 +35,10 @@ const App = () => {
           incButtonId={'break-increment'}
           lengthLabelId={'break-length'}
         />
+        <span className='divider' />
         <TimerLength
           label={'Session Length'}
-          value={sessionTimerLength}
+          initialValue={sessionTimerLength}
           disabled={sessionTimerLengthDisabled}
           onUpdate={updateSessionTimerLength}
           labelId={'session-label'}
@@ -46,7 +48,7 @@ const App = () => {
         />
       </div>
       <Timer />
-    </div>
+    </main>
   );
 };
 
