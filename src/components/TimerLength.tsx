@@ -1,13 +1,9 @@
-import { useCallback, useState } from 'react';
 import './TimerLength.scss';
 
 type TimerLengthProps = {
   label: string;
-  labelId: string;
-  decButtonId: string;
-  incButtonId: string;
-  lengthLabelId: string;
-  initialValue: number;
+  idPrefix: string;
+  value: number;
   step?: number;
   disabled: boolean;
   onUpdate: (value: number) => void;
@@ -15,47 +11,34 @@ type TimerLengthProps = {
 
 const TimerLength = ({
   label,
-  labelId,
-  decButtonId,
-  incButtonId,
-  lengthLabelId,
-  initialValue,
+  idPrefix,
+  value,
   step = 1,
   disabled,
   onUpdate,
 }: TimerLengthProps) => {
-  const [value, setValue] = useState(initialValue);
-
-  const clickHandler = useCallback(
-    (length: number) => {
-      setValue(length);
-      onUpdate(length);
-    },
-    [onUpdate],
-  );
-
   return (
     <div className='timer-length'>
-      <span id={labelId} className='label'>
+      <span id={`${idPrefix}-label`} className='label'>
         {label}
       </span>
       <div>
         <button
-          id={decButtonId}
+          id={`${idPrefix}-decrement`}
           className='decrement-button'
           disabled={disabled || value - step <= 0}
-          onClick={clickHandler.bind(this, value - step)}
+          onClick={() => onUpdate(value - step)}
         >
           <i className='fa-solid fa-circle-minus'></i>
         </button>
-        <span id={lengthLabelId} className='value'>
+        <span id={`${idPrefix}-length`} className='value'>
           {value}
         </span>
         <button
-          id={incButtonId}
+          id={`${idPrefix}-increment`}
           className='increment-button'
           disabled={disabled}
-          onClick={clickHandler.bind(this, value + step)}
+          onClick={() => onUpdate(value + step)}
         >
           <i className='fa-solid fa-circle-plus'></i>
         </button>

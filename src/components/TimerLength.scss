@@ -32,7 +32,7 @@
     transition: background 0.5s;
     border: none;
 
-    &:not(:hover) {
+    &:not(:hover):not(:disabled) {
       color: initial !important;
     }
 
