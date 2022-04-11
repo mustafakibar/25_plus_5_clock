@@ -3,49 +3,28 @@
 .timer-length {
   @include centered;
 
+  button,
+  span {
+    color: hsla(200, 60%, 60%, 1);
+  }
+
   > div {
     @include centered(row);
   }
 
   .label {
     display: block;
-    font-size: 1.5rem;
-    font-weight: 900;
-    padding: 1rem;
+    font-size: 1rem;
+    padding: 0.25rem;
   }
 
   .value {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-weight: 900;
     min-width: 3rem;
     text-align: center;
     pointer-events: none;
     touch-action: none;
-  }
-
-  button {
-    font-size: 1.5rem;
-    line-height: 1;
-    text-transform: uppercase;
-    position: relative;
-    padding: 0.3rem;
-    background: transparent;
-    transition: background 0.5s;
-    border: none;
-
-    &:not(:hover):not(:disabled) {
-      color: initial !important;
-    }
-
-    &:not(:disabled) {
-      &:hover,
-      &:focus {
-        color: rgba(0, 0, 0, 0.4);
-        cursor: pointer;
-      }
-
-      &:active {
-        top: 0.1rem;
-      }
-    }
+    color: hsla(200, 80%, 30%, 1);
   }
 }

@@ -26,21 +26,21 @@ const TimerLength = ({
         <button
           id={`${idPrefix}-decrement`}
           className='decrement-button'
-          disabled={disabled || value - step <= 0}
+          disabled={disabled || value <= 1}
           onClick={() => onUpdate(value - step)}
         >
-          <i className='fa-solid fa-circle-minus'></i>
+          <i className='fa-solid fa-circle-minus' />
         </button>
         <span id={`${idPrefix}-length`} className='value'>
           {value}
         </span>
         <button
-          id={`${idPrefix}-increment`}
+          id={[idPrefix, '-increment'].join('')}
           className='increment-button'
-          disabled={disabled}
+          disabled={disabled || value >= 60}
           onClick={() => onUpdate(value + step)}
         >
-          <i className='fa-solid fa-circle-plus'></i>
+          <i className='fa-solid fa-circle-plus' />
         </button>
       </div>
     </div>
